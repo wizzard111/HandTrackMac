@@ -4,58 +4,47 @@
 
 # HANDTRACK — macOS
 
-**Жесты, взгляд, скрытие лица и рисование в воздухе — прямо в ваших звонках.**
-Zoom, Telegram, Discord, Google Meet через OBS Virtual Camera.
+**Gestures, gaze, face hiding and drawing in the air, right inside your calls.**
+Zoom, Telegram, Discord and Google Meet through OBS Virtual Camera.
 
 *In collaboration with [Claude](https://claude.ai).*
 
-[⬇ Скачать](../../releases/latest) · [Пошаговая установка](HOW-TO-INSTALL.txt) · [Windows](https://github.com/OWNER/HandTrackWindows) · [Linux](https://github.com/OWNER/HandTrackLinux) · [English](#english)
+[⬇ Download](../../releases/latest) · [Step-by-step install](HOW-TO-INSTALL.txt) · [Windows](https://github.com/OWNER/HandTrackWindows) · [Linux](https://github.com/OWNER/HandTrackLinux)
 
 <img src="docs/screenshots/live.png" width="880" alt="HandTrack">
 
 </div>
 
-## Установка
+## Install
 
-1. [Releases](../../releases/latest) → **handtrack-macos.zip** → двойной щелчок.
-2. Дважды щёлкните **Install HandTrack.command**. macOS предупредит, что не может проверить файл:
-   «Системные настройки → Конфиденциальность и безопасность → Всё равно открыть» (macOS 15+)
-   или «правой кнопкой → Открыть» (macOS 12–14). Права на запуск уже выставлены.
-3. Установщик соберёт HandTrack.app на вашем Mac (3–6 минут), положит в «Программы»
-   и предложит поставить OBS — его виртуальная камера нужна для звонков.
+1. [Releases](../../releases/latest) → **handtrack-macos.zip** → double-click it.
+2. Double-click **Install HandTrack.command**. macOS warns that it cannot verify the file:
+   "System Settings → Privacy & Security → Open Anyway" (macOS 15+)
+   or "right-click → Open" (macOS 12–14). The files are already executable.
+3. The installer builds HandTrack.app on your Mac (3–6 minutes), puts it in Applications
+   and offers to install OBS, whose virtual camera carries the picture into your calls.
 
-Подробно: [HOW-TO-INSTALL.txt](HOW-TO-INSTALL.txt). Удаление: **Uninstall HandTrack.command**.
+Step by step: [HOW-TO-INSTALL.txt](HOW-TO-INSTALL.txt). Uninstall: **Uninstall HandTrack.command**.
+Running the installer again only rebuilds or copies what changed.
 
-**Почему OBS:** Apple разрешает виртуальные камеры только приложениям с платной подписью
-разработчика (Camera Extension). Поэтому HandTrack отправляет кадры в бесплатную
-OBS Virtual Camera; сам OBS при этом держать открытым не нужно.
+**Why OBS:** Apple only allows virtual cameras in apps with a paid developer signature
+(Camera Extension). So HandTrack sends its frames to the free OBS Virtual Camera; OBS itself
+does not have to stay open.
 
-**Почему сборка на вашем Mac:** собранное локально приложение macOS не блокирует как
-«скачанное из интернета», и разрешения на камеру выдаются нормально.
+**Why build on your Mac:** macOS does not block a locally built app as "downloaded from the
+internet", and camera permissions are granted normally.
 
-## Устройство репозитория
+## Repository layout
 
 ```
-Install HandTrack.command     установщик
-Uninstall HandTrack.command   деинсталлятор
-HOW-TO-INSTALL.txt            пошаговая инструкция
-src/handtrack/                программа (тот же код, что и в Windows/Linux)
-packaging/macos/              сборка HandTrack.app (PyInstaller, иконка .icns)
-tests/                        тесты
+Install HandTrack.command     installer
+Uninstall HandTrack.command   uninstaller
+HOW-TO-INSTALL.txt            step-by-step guide
+src/handtrack/                the program (same code as on Windows/Linux)
+packaging/macos/              HandTrack.app build (PyInstaller, .icns icon)
+tests/                        tests
 ```
 
-## Лицензия
+## License
 
-[MIT](LICENSE). Сторонние компоненты — [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).
-
----
-
-<a id="english"></a>
-
-## English
-
-Download **handtrack-macos.zip** from [Releases](../../releases/latest), double-click
-**Install HandTrack.command** (macOS 15+: System Settings → Privacy & Security → "Open Anyway";
-macOS 12–14: right-click → Open). The installer builds HandTrack.app on your Mac, puts it in
-Applications and offers to install OBS, whose virtual camera carries the picture into your calls.
-Uninstall with **Uninstall HandTrack.command**. Step by step: [HOW-TO-INSTALL.txt](HOW-TO-INSTALL.txt).
+[MIT](LICENSE). Third-party components: [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).

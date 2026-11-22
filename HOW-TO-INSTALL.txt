@@ -1,123 +1,104 @@
 =====================================================================
-  HANDTRACK ДЛЯ MAC — ПОШАГОВАЯ УСТАНОВКА
-  (English version below)
-=====================================================================
-
-HandTrack распознаёт жесты рук, может скрыть ваше лицо, рисовать в воздухе
-и показывает всё это в звонках (Zoom, Telegram, Discord, Google Meet).
-
-Нужно: macOS 12 Monterey или новее (Apple M1/M2/M3/M4 или Intel),
-веб-камера, интернет на время установки, ~1,5 ГБ свободного места.
-
-Про камеру для звонков: Apple разрешает виртуальные камеры только
-программам с платной подписью разработчика. Поэтому на Mac HandTrack
-отправляет картинку в бесплатную «OBS Virtual Camera» — установщик
-предложит поставить OBS. Сам OBS держать открытым не нужно.
-
-
----------------------------------------------------------------------
-ШАГ 1. СКАЧАЙТЕ И РАСПАКУЙТЕ
----------------------------------------------------------------------
-
-  1. Страница Releases -> handtrack-macos.zip
-     (или зелёная кнопка «Code» -> «Download ZIP»).
-  2. Дважды щёлкните по архиву — появится папка HandTrack. В ней:
-       Install HandTrack.command     <- установщик
-       Uninstall HandTrack.command   <- удаление
-       HOW-TO-INSTALL.txt            <- эта инструкция
-  Права на запуск у файлов уже есть.
-
-
----------------------------------------------------------------------
-ШАГ 2. ЗАПУСТИТЕ УСТАНОВЩИК
----------------------------------------------------------------------
-
-  1. Дважды щёлкните  Install HandTrack.command
-
-  2. macOS скажет, что не может проверить файл. Это потому, что
-     программа бесплатная и не подписана в Apple. Разрешите запуск:
-       - macOS 15 Sequoia и новее: нажмите «Готово», откройте
-         Системные настройки -> Конфиденциальность и безопасность,
-         прокрутите вниз и нажмите «Всё равно открыть», затем снова
-         «Открыть» и введите пароль Mac;
-       - macOS 12-14: правой кнопкой по файлу -> «Открыть» -> «Открыть».
-     Это нужно только один раз.
-
-  3. Откроется Терминал с шагами. Установка собирает программу прямо
-     на вашем Mac: первый раз 3-6 минут. Если спросит пароль Mac —
-     введите (при вводе он не виден, это нормально).
-
-  4. «Установить OBS сейчас?» — нажмите Enter (= да).
-
-  5. HandTrack запустится и спросит доступ к камере — «Разрешить».
-     Дальше открывайте HandTrack из «Программ» или Launchpad.
-
-
----------------------------------------------------------------------
-ШАГ 3. ОДИН РАЗ ВКЛЮЧИТЕ КАМЕРУ OBS
----------------------------------------------------------------------
-
-  1. Откройте OBS из «Программ», пропустите мастер настройки.
-  2. Справа внизу нажмите «Запустить виртуальную камеру».
-  3. macOS попросит разрешить системное расширение:
-     Системные настройки -> Конфиденциальность и безопасность ->
-     «Разрешить». Затем закройте OBS.
-
-
----------------------------------------------------------------------
-ШАГ 4. ПОЛЬЗУЙТЕСЬ
----------------------------------------------------------------------
-
-  1. В HandTrack нажмите «СТАРТ», включите «Транслировать в
-     виртуальную камеру».
-  2. В Zoom / Telegram / Discord выберите камеру «OBS Virtual Camera».
-
-  * «Скрыть лицо» — чёрная маска на лице и значок COVERING.
-  * Рисование: соедините большой и указательный пальцы и ведите рукой.
-  * «Мои жесты» с клавишами: Системные настройки -> Конфиденциальность
-    и безопасность -> Универсальный доступ -> включите HandTrack.
-
-
----------------------------------------------------------------------
-УДАЛЕНИЕ
----------------------------------------------------------------------
-
-  Дважды щёлкните  Uninstall HandTrack.command  (в этой папке).
-  Он удалит программу и её разрешения и спросит про настройки.
-  OBS удаляется отдельно: перетащите его из «Программ» в Корзину.
-
-
----------------------------------------------------------------------
-ЕСЛИ ЧТО-ТО НЕ ТАК
----------------------------------------------------------------------
-
-  * Чёрный экран в HandTrack: Системные настройки -> Конфиденциальность
-    и безопасность -> Камера -> включите HandTrack, перезапустите его.
-  * Нет «OBS Virtual Camera» в звонке: выполните шаг 3 и перезапустите
-    приложение для звонков.
-  * Что-то сломалось или пропало — просто запустите установку ещё раз:
-    она проверит, чего не хватает, и поставит только это, ничего
-    не перекачивая и не перезаписывая.
-  * Журнал установки: install.log в этой папке.
-    Журнал программы: ~/Library/Application Support/HandTrack/logs
-
-
-=====================================================================
   HANDTRACK FOR MAC — STEP BY STEP
 =====================================================================
 
-You need macOS 12+ (Apple silicon or Intel), a webcam, internet during setup.
-Apple only allows virtual cameras from apps with a paid developer signature,
-so on a Mac HandTrack feeds the free "OBS Virtual Camera".
+HandTrack recognises hand gestures, can hide your face, lets you draw
+in the air and shows all of it in your calls (Zoom, Telegram, Discord,
+Google Meet).
 
-1. Releases -> handtrack-macos.zip (or "Code" -> "Download ZIP"); double-click it.
-2. Double-click "Install HandTrack.command". macOS says it cannot verify it:
-   macOS 15+: System Settings -> Privacy & Security -> "Open Anyway";
-   macOS 12-14: right-click the file -> Open -> Open. Only once.
-3. Terminal shows each step; the app is built on your Mac (3-6 min the first time).
-   Answer Enter to install OBS. Allow camera access when HandTrack asks.
-4. Once: open OBS -> "Start Virtual Camera" -> allow the system extension in
-   System Settings -> Privacy & Security; then quit OBS.
-5. In HandTrack press START and enable "Stream to virtual camera";
-   in your call app pick "OBS Virtual Camera".
-UNINSTALL: double-click "Uninstall HandTrack.command".
+You need: macOS 12 Monterey or newer (Apple M1/M2/M3/M4 or Intel),
+a webcam, internet during setup, ~1.5 GB of free space.
+
+About the call camera: Apple only allows virtual cameras in apps with
+a paid developer signature. So on a Mac HandTrack sends its picture to
+the free "OBS Virtual Camera"; the installer offers to install OBS.
+OBS itself does not have to stay open.
+
+
+---------------------------------------------------------------------
+STEP 1. DOWNLOAD AND UNZIP
+---------------------------------------------------------------------
+
+  1. Releases page -> handtrack-macos.zip
+     (or the green "Code" button -> "Download ZIP").
+  2. Double-click the archive: a HandTrack folder appears. It contains:
+       Install HandTrack.command     <- the installer
+       Uninstall HandTrack.command   <- the uninstaller
+       HOW-TO-INSTALL.txt            <- this guide
+  The files are already executable.
+
+
+---------------------------------------------------------------------
+STEP 2. RUN THE INSTALLER
+---------------------------------------------------------------------
+
+  1. Double-click  Install HandTrack.command
+
+  2. macOS says it cannot verify the file, because the app is free and
+     not signed with Apple. Allow it to run:
+       - macOS 15 Sequoia and newer: click "Done", open
+         System Settings -> Privacy & Security, scroll down and click
+         "Open Anyway", then "Open" again and type your Mac password;
+       - macOS 12-14: right-click the file -> "Open" -> "Open".
+     This is needed only once.
+
+  3. Terminal opens and shows each step. The installer builds the app
+     right on your Mac: 3-6 minutes the first time. If it asks for your
+     Mac password, type it (it is not shown while typing; that is
+     normal).
+
+  4. "Install OBS now?" — press Enter (= yes).
+
+  5. HandTrack starts and asks for camera access — click "Allow".
+     Later, open HandTrack from Applications or Launchpad.
+
+
+---------------------------------------------------------------------
+STEP 3. TURN THE OBS CAMERA ON ONCE
+---------------------------------------------------------------------
+
+  1. Open OBS from Applications and skip the setup wizard.
+  2. Bottom right, click "Start Virtual Camera".
+  3. macOS asks to allow a system extension:
+     System Settings -> Privacy & Security -> "Allow". Then quit OBS.
+
+
+---------------------------------------------------------------------
+STEP 4. USE IT
+---------------------------------------------------------------------
+
+  1. In HandTrack press "Start" and switch on "Stream to virtual
+     camera".
+  2. In Zoom / Telegram / Discord choose the camera
+     "OBS Virtual Camera".
+
+  * "Hide face" puts a black mask over your face and shows a
+    COVERING badge.
+  * Drawing: pinch your thumb and index finger together and move
+    your hand.
+  * "My gestures" with keys: System Settings -> Privacy & Security ->
+    Accessibility -> turn on HandTrack.
+
+
+---------------------------------------------------------------------
+UNINSTALL
+---------------------------------------------------------------------
+
+  Double-click  Uninstall HandTrack.command  (in this folder).
+  It removes the app and its permissions and asks about your settings.
+  OBS is removed separately: drag it from Applications to the Bin.
+
+
+---------------------------------------------------------------------
+IF SOMETHING GOES WRONG
+---------------------------------------------------------------------
+
+  * Black screen in HandTrack: System Settings -> Privacy & Security
+    -> Camera -> turn on HandTrack, then restart it.
+  * No "OBS Virtual Camera" in your call: do step 3 and restart the
+    call app.
+  * Something broke or went missing — just run the installer again.
+    It checks what is missing and installs only that, without
+    downloading or overwriting anything else.
+  * Install log: install.log in this folder.
+    App log:     ~/Library/Application Support/HandTrack/logs
