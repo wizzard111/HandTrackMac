@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: packaging/requirements*.txt
-      - run: python -m pip install -r packaging/requirements-dev.txt pyvirtualcam
+      - run: python -m pip install uv && python -m uv pip install --system -r packaging/requirements-dev.txt pyvirtualcam --override packaging/overrides.txt
       - run: python -m pytest -q
       - name: Shell scripts are valid
         run: bash -n "Install HandTrack.command" && bash -n "Uninstall HandTrack.command" && bash -n packaging/macos/build.sh

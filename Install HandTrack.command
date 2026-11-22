@@ -54,11 +54,23 @@ else
 fi
 # Offline first: succeeds without the network when every library is already
 # installed (or cached); only otherwise download what is missing.
-if "$UVDIR/uv" pip install --offline --quiet --python "$PY" -r packaging/requirements-dev.txt pyvirtualcam >/dev/null 2>&1; then
+# Older installs carry the GUI OpenCV builds, matplotlib and sounddevice. All
+# OpenCV builds share one cv2 folder, so remove them together with the
+# headless one; it is reinstalled cleanly just below.
+EXTRAS="$("$UVDIR/uv" pip list --python "$PY" --format freeze 2>/dev/null \
+    | grep -ioE '^(opencv-python|opencv-contrib-python|matplotlib|sounddevice)==' | tr -d '=' | tr '\n' ' ')"
+if [ -n "$EXTRAS" ]; then
+    "$UVDIR/uv" pip uninstall --python "$PY" $EXTRAS opencv-python-headless >/dev/null 2>&1
+    did "removed unneeded packages: $EXTRAS"
+fi
+# overrides.txt drops mediapipe's unneeded extras (GUI OpenCV, matplotlib, audio).
+if "$UVDIR/uv" pip install --offline --quiet --python "$PY" -r packaging/requirements-dev.txt pyvirtualcam \
+        --override packaging/overrides.txt >/dev/null 2>&1; then
     have "libraries"
 else
     echo "   Downloading libraries (first time ~3-6 minutes)"
-    "$UVDIR/uv" pip install --python "$PY" -r packaging/requirements-dev.txt pyvirtualcam || fail "pip install"
+    "$UVDIR/uv" pip install --python "$PY" -r packaging/requirements-dev.txt pyvirtualcam \
+        --override packaging/overrides.txt || fail "pip install"
     did "libraries"
 fi
 
