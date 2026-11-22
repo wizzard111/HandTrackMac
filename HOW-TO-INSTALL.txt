@@ -78,6 +78,8 @@ STEP 4. USE IT
     your hand.
   * "My gestures" with keys: System Settings -> Privacy & Security ->
     Accessibility -> turn on HandTrack.
+  * The system-wide Hide face hotkey of the Windows and Linux versions
+    is not available on macOS yet.
 
 
 ---------------------------------------------------------------------
