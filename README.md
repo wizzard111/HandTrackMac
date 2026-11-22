@@ -45,6 +45,51 @@ packaging/macos/              HandTrack.app build (PyInstaller, .icns icon)
 tests/                        tests
 ```
 
+## Performance
+
+Measured with [`packaging/benchmark.py`](packaging/benchmark.py): the real app runs each situation for
+20 s in a fresh process while the script samples its CPU and memory once a second. To compare
+operating systems on equal terms, a 1280×720 video at 30 FPS (an empty room, so hand and face
+detection keep searching: the costly case) stands in for the webcam.
+
+Machine: AMD Ryzen 5 5600X (6 cores, 12 threads), 16 GB RAM. HandTrack 8.2.0, Python 3.12.
+CPU is in % of **one** core, summed over all of the app's threads; divide by 12 for the share of the
+whole processor. RAM is the resident set (working set on Windows; includes shared libraries), USS is
+memory used by HandTrack alone.
+
+| Situation | Windows 11: CPU | RAM | USS | Linux (Debian 13): CPU | RAM | USS |
+|---|---:|---:|---:|---:|---:|---:|
+| Window open, camera off | 1.0 % | 192 MB | 124 MB | 0.3 % | 227 MB | 212 MB |
+| In the tray, camera off | 1.2 % | 192 MB | 124 MB | — | — | — |
+| Camera on | 34 % | 224 MB | 151 MB | 28 % | 275 MB | 262 MB |
+| Camera on, window in the tray | 27 % | 224 MB | 151 MB | — | — | — |
+| Camera on + Hide face | 41 % | 221 MB | 148 MB | 29 % | 271 MB | 257 MB |
+| In a call: Hide face + virtual camera, read by a call app | 37 % | 234 MB | 158 MB | — | — | — |
+
+With the real webcam (Windows, Lenovo FHD webcam at 1280×720) the camera itself adds work: camera on
+54 %, Hide face 54 %, in a call 60 % of one core (4–5 % of the whole processor), 260–280 MB RAM.
+Linux was measured under WSL2 (WSLg); "—" means the situation needs a tray or the Windows camera
+driver, which WSL lacks. macOS has not been measured.
+
+How it stays light:
+
+- Idle costs nothing: no timers repaint the window; the preview, status tags and gaze map redraw
+  only when something changes. Before 8.2 an idle window took 11 % of a core.
+- Detection slows down while nothing is in view (hands 15, faces 10 checks a second) and returns to
+  full rate the moment a hand or face appears. Processing runs on its own thread, the neural
+  networks asynchronously; the interface never waits for the camera.
+- Every frame is processed once: the AFK screen is rendered once and copied, the preview is
+  converted to Qt's native format on the video thread and is not prepared while hidden, stickers
+  are blended with integer maths, and the drawing goes straight into the frame.
+- No idle thread pools: OpenCV runs single-threaded and numpy's OpenBLAS uses one thread (its
+  per-core buffers alone were ~350 MB of private memory).
+- Only what is needed is installed: the headless OpenCV, without mediapipe's GUI OpenCV,
+  matplotlib and audio packages. The face-hiding sound is played by the operating system, with no
+  audio library in the app.
+
+Reproduce: `PYTHONPATH=src python packaging/benchmark.py --video any-video.mp4`
+(or `--video camera` for the webcam).
+
 ## License
 
 [MIT](LICENSE). Third-party components: [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).
