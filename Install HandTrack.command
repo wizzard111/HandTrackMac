@@ -104,7 +104,23 @@ else
 fi
 cp -f "Uninstall HandTrack.command" "$APP/Contents/Resources/" 2>/dev/null
 
-# ---------------------------------------------------------------- 3. virtual camera (OBS)
+# ---------------------------------------------------------------- 3. camera permission
+# macOS asks once per app. Ask now, on behalf of HandTrack.app (not Terminal),
+# so the app never waits for an unanswered prompt later.
+step "Camera access"
+PERM="$HOME/Library/Application Support/HandTrack/camera-permission.txt"
+mkdir -p "$(dirname "$PERM")" && rm -f "$PERM"
+echo "   If macOS asks whether HandTrack may use the camera, click \"Allow\"."
+open -n -W "$APP" --args --request-camera   # -n: a new process, even if HandTrack is open
+case "$(cat "$PERM" 2>/dev/null)" in
+    authorized) did "camera allowed" ;;
+    denied|restricted)
+        printf "${RED}   Camera access is off for HandTrack.${RST}\n"
+        echo "   Turn it on: System Settings > Privacy & Security > Camera > HandTrack." ;;
+    *) echo "   (could not check the camera permission; HandTrack asks again on Start)" ;;
+esac
+
+# ---------------------------------------------------------------- 4. virtual camera (OBS)
 if [ ! -d /Applications/OBS.app ]; then
     step "Virtual camera for calls"
     echo "On macOS the camera for calls comes from the free OBS Studio."
@@ -129,12 +145,11 @@ Turn the OBS camera on once:
 EOF
 fi
 
-# ---------------------------------------------------------------- 4. start
+# ---------------------------------------------------------------- 5. start
 step "Starting HandTrack"
 open "$APP"
 cat <<'EOF'
 
-macOS asks for camera access — click "Allow".
 For your own key-press gestures: System Settings > Privacy & Security >
 Accessibility > turn on HandTrack.
 EOF
