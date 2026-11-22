@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Build output (also the macOS installer's local Python + build)
+/build/
+/dist/
+install.log
+
+# User data of v6/v7 source checkouts (now migrated to the per-user folder)
+/models/
+/logs/
+/screenshots/
+/images/
+/app_settings.json
+/custom_gestures.json
+/gaze_calibration.json
+/hand_calibration.json
+*.tmp
