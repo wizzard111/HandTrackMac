@@ -118,5 +118,9 @@ UPDATING
   Permissions: the installer (or the first update) asks for your Mac
   password once, to set up a lasting signature for HandTrack, so macOS
   keeps its camera and Accessibility permissions across updates.
+  Disk space: the updater keeps Python, the libraries and the last build
+  in ~/Library/Caches/HandTrack-updater - up to about 1 GB - so later
+  updates do not download them again. You may delete that folder at any
+  time (the next update then takes longer); the uninstaller removes it.
   (Installed with an older version that has no such entry? Double-click
   "Update HandTrack.command" in the downloaded folder once.)

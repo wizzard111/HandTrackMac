@@ -31,6 +31,31 @@ Running the installer again only rebuilds or copies what changed.
 (Camera Extension). So HandTrack sends its frames to the free OBS Virtual Camera; OBS itself
 does not have to stay open.
 
+## Update
+
+HandTrack has an updater: **Update HandTrack** in Applications or Launchpad (the installer adds it). It asks
+GitHub whether a newer version exists, backs up your settings, calibration and gestures
+(`~/Library/Application Support/HandTrack-updater/backups`, the last 3), downloads the release and checks its
+SHA-256, and runs its installer, which builds the new HandTrack.app and replaces the old one. Afterwards it checks
+that every setting is still there. Installed with an older version without "Update HandTrack"? Double-click
+**Update HandTrack.command** in the downloaded folder once (allow it like the installer).
+Options: `--check`, `--force`, `--yes`, `--package FILE`.
+
+**Permissions stay after updates.** macOS keeps the camera and Accessibility permissions only for an app signed
+with the same certificate every time. The installer (or the first update) makes a free local code-signing
+certificate in its own keychain and asks for your Mac password once, to trust it for code signing; every build is
+signed with it. If you skip the password, everything still works, but macOS asks for the permissions again after
+each update.
+
+**Disk space used by the updater — it does take some room on a Mac:**
+
+| | |
+|---|---|
+| The updater | one script of about 20 KB, plus the "Update HandTrack" app (a few KB) |
+| Build folder | **up to about 1 GB** in `~/Library/Caches/HandTrack-updater`: the source code, a private Python 3.12, the libraries (MediaPipe, OpenCV, Qt) and the last build. They are kept so the next update does not download them again and builds in minutes instead of 5–10. Delete the folder to free the space; the next update then downloads everything again. The uninstaller removes it. |
+| Settings backups | a few KB (the last 3) |
+| Signing certificate | a few KB (`~/Library/Application Support/reflex-local-signing`, shared with Aerox Lite) |
+
 **Why build on your Mac:** macOS does not block a locally built app as "downloaded from the
 internet", and camera permissions are granted normally.
 
@@ -39,6 +64,7 @@ internet", and camera permissions are granted normally.
 ```
 Install HandTrack.command     installer
 Uninstall HandTrack.command   uninstaller
+Update HandTrack.command      updater ("Update HandTrack" in Applications after installing)
 HOW-TO-INSTALL.txt            step-by-step guide
 src/handtrack/                the program (same code as on Windows/Linux)
 packaging/macos/              HandTrack.app build (PyInstaller, .icns icon)
