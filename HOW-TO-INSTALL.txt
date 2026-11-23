@@ -24,6 +24,7 @@ STEP 1. DOWNLOAD AND UNZIP
   2. Double-click the archive: a HandTrack folder appears. It contains:
        Install HandTrack.command     <- the installer
        Uninstall HandTrack.command   <- the uninstaller
+       Update HandTrack.command      <- installs a newer version
        HOW-TO-INSTALL.txt            <- this guide
   The files are already executable.
 
@@ -104,3 +105,15 @@ IF SOMETHING GOES WRONG
     downloading or overwriting anything else.
   * Install log: install.log in this folder.
     App log:     ~/Library/Application Support/HandTrack/logs
+
+---------------------------------------------------------------------
+UPDATING
+---------------------------------------------------------------------
+
+  Double-click "Update HandTrack.command" (allow it to run the same way
+  as the installer, once). It checks GitHub for a newer version, backs up
+  your settings, calibration and gestures, builds the new HandTrack.app
+  and replaces the old one. Everything you set up is kept. The next
+  updates are faster: Python and the libraries are kept for them.
+  If your own key-press gestures stop working, switch HandTrack off and on
+  again under Privacy & Security -> Accessibility.
