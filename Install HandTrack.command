@@ -88,6 +88,9 @@ else
     echo "$BUILD_ID" > build/.build-id
     did "HandTrack.app built"
 fi
+# A lasting local signature, so macOS keeps the camera / Accessibility permissions after updates
+# (the Mac password is asked once), and "Update HandTrack" in Applications for later updates.
+[ -f "Update HandTrack.command" ] && bash "Update HandTrack.command" --setup --sign build/dist/HandTrack.app
 
 if [ -d "$APP" ] && diff -rq -x "Uninstall HandTrack.command" build/dist/HandTrack.app "$APP" >/dev/null 2>&1; then
     have "$APP"

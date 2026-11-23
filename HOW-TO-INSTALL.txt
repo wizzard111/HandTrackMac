@@ -110,10 +110,13 @@ IF SOMETHING GOES WRONG
 UPDATING
 ---------------------------------------------------------------------
 
-  Double-click "Update HandTrack.command" (allow it to run the same way
-  as the installer, once). It checks GitHub for a newer version, backs up
-  your settings, calibration and gestures, builds the new HandTrack.app
-  and replaces the old one. Everything you set up is kept. The next
-  updates are faster: Python and the libraries are kept for them.
-  If your own key-press gestures stop working, switch HandTrack off and on
-  again under Privacy & Security -> Accessibility.
+  Launchpad / Applications -> "Update HandTrack" (the installer puts it
+  there). It checks GitHub for a newer version, backs up your settings,
+  calibration and gestures, builds the new HandTrack.app and replaces the
+  old one. Everything you set up is kept. Later updates are faster:
+  Python and the libraries are kept for them.
+  Permissions: the installer (or the first update) asks for your Mac
+  password once, to set up a lasting signature for HandTrack, so macOS
+  keeps its camera and Accessibility permissions across updates.
+  (Installed with an older version that has no such entry? Double-click
+  "Update HandTrack.command" in the downloaded folder once.)

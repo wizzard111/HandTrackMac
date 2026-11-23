@@ -18,13 +18,17 @@ sleep 1
 if [ -d "$APP" ]; then
     rm -rf "$APP" 2>/dev/null || sudo rm -rf "$APP"
 fi
+# The updater's launcher and its build folder.
+rm -rf "/Applications/Update HandTrack.app" "$HOME/Applications/Update HandTrack.app" \
+       "$HOME/Library/Application Support/HandTrack-updater/Update HandTrack.command" \
+       "$HOME/Library/Caches/HandTrack-updater" 2>/dev/null
 tccutil reset Camera "$BUNDLE_ID" >/dev/null 2>&1
 tccutil reset Accessibility "$BUNDLE_ID" >/dev/null 2>&1
 # Local build files of the installer (Python, libraries) next to this script.
 [ -d build ] && [ -f src/handtrack/__init__.py ] && rm -rf build
 
 if [[ "$a" =~ ^[Yy] ]]; then
-    rm -rf "$SETTINGS" && echo "Settings deleted."
+    rm -rf "$SETTINGS" "$HOME/Library/Application Support/HandTrack-updater" && echo "Settings deleted."
 elif [ -d "$SETTINGS" ]; then
     echo "Settings kept: $SETTINGS"
 fi
